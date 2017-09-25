@@ -1,0 +1,12 @@
+1.  stdint.h is a headerfile wherein different kind of integer variables are defined. If you include the header at the top of your program you can use these variables in your program.
+2.  these types are more explicitly defined, for instance in terms of size and if they are signed or unsigned. This makes them more portable between different kind of systems and can help in programming.
+3.  1, 4, 4, 2.
+4.  42 4D.
+5.  bfSize is the size of the whole file, including the headers. biSize is the size of only the pixels.
+6.  It means the bitmap is drawn starting at the top-left corner.
+7.  biBitCount.
+8.  Because the file you try to open doesn't exist.
+9.  Because we want to read only one block of a given size.
+10. 2
+11. fseek allows you to move the pointer ('point') to a certain location in the file, which you can specify related to your current location, the beginnin or the end of the file.
+12. SEEK_CUR means you change the location of the pointer relative to its current location.
