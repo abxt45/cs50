@@ -1,0 +1,60 @@
+0.  "an artificial long word said to mean a lung disease caused by inhaling very fine
+    ash and sand dust", according to oxford dictionary.
+
+1.  getrusage is a function that measures the duration and usage of various resources
+    by a process, in a number of different ways.
+
+2.  14+((2*timeval)*2) = 18
+
+3.  passing by reference, instead of value, means you manipulate variables directly
+    in memory instead of making a copy and manipulating that copy. In this current
+    project we are dealing with relatively large datasets and it has been said that
+    performace is important. Making copies takes much more performance than direct
+    manipulation.
+
+4.  how main goes about reading words from a file:
+    -----------------
+    The text file referred to by 'fp'. In the loop, with fgetc, on each iteration
+    of the loop the int c refers to the next char of fp, until c = EOF. Then the loop
+    is ended.
+
+    Before the loop an index has been created. This keeps count of the number of
+    letters created in the current word in the loop cycle. After a word is finished
+    index is reset to 0.
+
+    If c is alphabetic or (an apostrophe, and we are not in the first letter
+    (index > )):
+    -It is the first letter of the first word or
+    -It is an apostrophe in a word.
+
+        char c is appended to the array of the current word. The correct place to put
+        it is found with the index. Afterwars the index is upped by 1.
+
+        If index gets larger than the largest word in the dictionary:
+
+            If the current character does not equal EOF and is alphabetic, index  is
+            reset to 0. Loop this until you encounter an alphabetic character.
+            On each iteration of the loop 'fp' is upped 1.
+
+    Else, if c is a digit, reset index to 0. Loop this until you encounter an
+    alphanumeric character. On each iteration of the loop 'fp' is upped 1.
+
+    Else, if index > 0: we must have found a whole word and it is not the first word.
+
+        Add \0 to current word.
+
+        One up the wordS counter.
+
+        Check the words spelling with the 'check' function and keep count of stats
+        with getrusage and time_check. Print the word if misspelled.
+
+        Reset index.
+    ---------------
+
+5.  -We dont know how long the word we are scanning is before we start, so we dont
+    know how much memory we need if using fscanf
+    -fscanf %s will see punctuation as part of a word. With fgetc we can exclude it.
+
+6.  The 'check' and 'load' constants are '*word' and '*dictionary'. They are given
+    both as pointers. The pointers should keep referring to the same part of memory
+    troughout the function and not be altered, in other words stay constant.
