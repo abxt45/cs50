@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>NumberOfStocks</th>
+        <th>PriceOfPurchase</th>
+        <th>DateOfPurchase</th>
+        <th>TimeOfPurchase</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in table%}
+        <TR>
+           <TD>{{i.Symbol}}</TD>
+           <TD>{{i.NumberOfStocks}}</TD>
+           <TD>{{i.PriceOfPurchase}}</TD>
+           <TD>{{i.DateOfPurchase}}</TD>
+           <TD>{{i.TimeOfPurchase}}</TD>
+        </TR>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

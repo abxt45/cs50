@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('index') }}" method="post">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Buy</th>
+            <th>Sell</th>
+            <th>Amount</th>
+            <th>Symbol</th>
+            <th>Total quantity</th>
+            <th>Current price</th>
+            <th>Current value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in table %}
+        <tr>
+            <td><div class="form-group"><input autofocus class="form-control" name="amount" placeholder="Amount" type="integer"></div></td>
+            <td><div class="form-group"><input type="radio" class="form-control" name="action" value="buy" checked> Buy<br><input type="radio" class="form-control" name="action" value="sell"> Sell<br></div></td>
+            <td><div class="form-group"><button class="btn btn-default" type="submit">Submit</button></div></td>
+            <td><input type="readonly" name="Symbol" value={{i.symbol}} ></td>
+            <td>{{i.total_q}}</td>
+            <td>{{i.curprice}}</td>
+            <td>{{i.curvalue}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    </form>
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Current cash</th>
+            <th>Stocks total value</th>
+            <th>Net worth</th>
+        </tr>
+    </thead>
+    <tbody>
+        <TR>
+            <td>{{usercash}}</td>
+            <td>{{total_curvalue}}</td>
+            <td>{{networth}}</td>
+        </TR>
+    </tbody>
+   </table>
+{% endblock %}
