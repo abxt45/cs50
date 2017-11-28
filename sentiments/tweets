@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import os
+import sys
+from nltk.tokenize import TweetTokenizer
+from analyzer import Analyzer
+from termcolor import colored
+
+from helpers import get_user_timeline
+
+#analyzes the sentiment of each of those tweets, and
+
+#outputs each tweet’s score and text, colored in green if positive,
+#red if negative, and yellow otherwise.
+
+
+def main():
+
+    # ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweets @username")
+
+    # absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+
+    # instantiate analyzer
+    analyzer = Analyzer(positives, negatives)
+
+    #get users tweets
+    tweets = get_user_timeline(sys.argv[1], 100)
+    if tweets == None:
+        print("Retrieving tweets failed")
+        sys.exit
+    tknzr = TweetTokenizer(strip_handles=True, reduce_len=True)
+    neutral = 0
+    positive = 0
+    negative = 0
+    for i in range(len(tweets)):
+        tweet = tknzr.tokenize(tweets[i])
+        score = analyzer.analyze(tweet)
+        if score > 0.0:
+            print(colored("{} {}".format(score, tweets[i]), "green"))
+            positive += 1
+        elif score < 0.0:
+            print(colored("{} {}".format(score, tweets[i]), "red"))
+            negative += 1
+        else:
+            print(colored("{} {}".format(score, tweets[i]), "yellow"))
+            neutral += 1
+    print("positive: {} negative: {} neutral: {}".format(positive, negative, neutral))
+
+if __name__ == "__main__":
+    main()
